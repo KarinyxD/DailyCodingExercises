@@ -19,10 +19,10 @@ int main(){
         float deltaY = pontosLinha[i][3] - pontosLinha[i][1];
         float deltaX = pontosLinha[i][2] - pontosLinha[i][0];
         if(deltaX == 0){
-            equacao[i][0] = NAN;
+            equacao[i][0] = INFINITY;
             equacao[i][1] = pontosLinha[i][0];
         }else{
-            float coefAng = (pontosLinha[i][3] - pontosLinha[i][1]) / (pontosLinha[i][2] - pontosLinha[i][0]);
+            float coefAng = (deltaY / deltaX);
             equacao[i][0] = coefAng;
             equacao[i][1] = coefAng * -(pontosLinha[i][0]) + pontosLinha[i][1];
         }
@@ -32,8 +32,8 @@ int main(){
     for(int i = 0; i < nLinhas; i++){
         for (int j = i+1; j < nLinhas; j++){
             if(equacao[i][0] == equacao[j][0] && equacao[i][1] == equacao[j][1]){
-                equacao[j][0] = INFINITY;
-                equacao[j][1] = INFINITY;
+                equacao[j][0] = NAN;
+                equacao[j][1] = NAN;
             }
         }
     }
@@ -41,11 +41,12 @@ int main(){
     //a cada reta, acrescentamos dois setores infinitos
     int setores = 0;
     for(int i = 0; i < nLinhas; i++){
-        if (equacao[i][0] != INFINITY){
+        if (!isnan(equacao[i][0])){
             setores += 2;
         }
     }
     if ((srsGuerra - setores) >= 0){
+       // printf("%d, %d\n", srsGuerra, setores);
         printf("%d\n", (int)ceil((srsGuerra - setores)/2.0));
     }else{
         printf("0\n");
