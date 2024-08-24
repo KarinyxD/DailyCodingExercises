@@ -1,7 +1,8 @@
 //https://judge.beecrowd.com/pt/problems/view/3230
+//15% error - probably the case with all parallel lines
+//with all parallel lines, we get lines + 1 = sectors
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 int main(){
